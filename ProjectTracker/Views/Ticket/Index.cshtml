@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ProjectTracker.Models.Ticket>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Items List</h2>
+        </div>
+        <div class="col-6">
+            <a asp-area="" asp-controller="Ticket" asp-action="Create" class="btn btn-primary">Create new Item</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        @using (Html.BeginForm())
+        {
+            <p>
+                Find by name or description: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+            </p>
+        }
+        <table class="table table-boredred table-striped" style="width:100%">
+
+            <thead>
+                <tr>
+                    <th>
+                        @*Item Name*@
+                        @*@Html.ActionLink("Item Name", "Index", new { sortOrder = ViewBag.NameSortParm })*@
+                        <a asp-controller="Ticket" asp-action="Index" asp-route-sortOrder="@ViewBag.NameSortParm" class="btn btn-outline-secondary font-weight-bold">Item Name &#8693;</a>
+                    </th>
+                    <th>
+                        @*Project Name*@
+                        @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectSortParm })
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        @*Creation Date*@
+                        @Html.ActionLink("Date Created", "Index", new { sortOrder = ViewBag.DateSortParm })
+                    </th>
+                    <th>
+                        Last Updated
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td width="15%">@item.Name</td>
+                        <td width="15%">@item.Project.Name</td>
+                        <td width="15%">@item.Description</td>
+                        <td width="15%">@item.Status</td>
+                        <td width="15%">@item.Created</td>
+                        <td width="15%">@item.Modified</td>
+                        @*<td width="15%">Edit</td>
+                            <td width="15%">Delete</td>*@
+                        <td width="15%">
+                            <a asp-controller="Ticket" asp-action="Details" asp-route-Id="@item.Id">Details</a>
+                        </td>
+                        <td width="30">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-controller="Ticket" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary">Update</a>
+                                @*<a asp-controller="Item" asp-action="DeletePost" asp-route-Id="@item.Id" class="btn btn-danger">Delete</a>*@
+                                <a asp-controller="Ticket" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No items created yet</p>
+    }
+
+</div>

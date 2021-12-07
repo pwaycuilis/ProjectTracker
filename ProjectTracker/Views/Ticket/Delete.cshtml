@@ -1,0 +1,74 @@
+﻿
+@model Ticket
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden />
+    <table class="table caption-top table-striped">
+        <caption>Add Ticket</caption>
+
+        <thead>
+            <tr>
+                <th scope="col">
+                    <label asp-for="Name"></label>
+                </th>
+
+                <th scope="col">Description</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Status</th>
+                <th scope="col">Type</th>
+                <th scope="col">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @*<th scope="row">Text Here</th>*@
+                <td>
+                    <input asp-for="Name" disabled class="form-control" />
+
+                </td>
+
+                <td>
+                    <input asp-for="Description" disabled class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="Priority" disabled class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="Status" disabled class="form-control" />
+                </td>
+
+                <td>
+                    <input asp-for="Type" disabled class="form-control" />
+                </td>
+                <td>
+                    @ViewBag.Created
+                </td>
+
+                <td>
+                    @*<select asp-for="ProjectId" asp-items="@ViewBag.ProjectId" class="form-control">
+                            <option value="0">Choose a Project</option>
+                        </select>*@
+                    @ViewBag.ProjectId
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="border p-3 border-bottom">
+        <div class="form-group row">
+            <div class="col-8 offset-2 row">
+                <div class="col">
+                    <input type="submit" class="btn btn-info w-75" value="Delete" />
+                </div>
+                <div class="col">
+                    <a asp-controller="Ticket" asp-action="Index" class="btn btn-danger w-75">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

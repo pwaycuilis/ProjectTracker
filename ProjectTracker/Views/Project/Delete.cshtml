@@ -1,0 +1,59 @@
+﻿
+@model Project
+
+<form method="post" asp-action="DeletePost">
+    <input asp-for="Id" hidden />
+    <table class="table caption-top table-striped">
+        <caption>Delete Project</caption>
+
+        <thead>
+            <tr>
+                <th scope="col">
+                    <label asp-for="Name"></label>
+                </th>
+
+                <th scope="col">Description</th>
+                
+                <th scope="col">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @*<th scope="row">Text Here</th>*@
+                <td>
+                    <input asp-for="Name" disabled class="form-control" />
+
+                </td>
+
+                <td>
+                    <input asp-for="Description" disabled class="form-control" />
+                </td>
+                
+                <td>
+                    @ViewBag.Created
+                </td>
+
+               
+            </tr>
+        </tbody>
+    </table>
+    <div class="border p-3 border-bottom">
+        <div class="form-group row">
+            <div class="col-8 offset-2 row">
+                <div class="col">
+                    <input type="submit" class="btn btn-info w-75" value="Delete" />
+                </div>
+                <div class="col">
+                    <a asp-controller="Project" asp-action="Index" class="btn btn-danger w-75">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

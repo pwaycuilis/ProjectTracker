@@ -1,0 +1,67 @@
+﻿
+@model IEnumerable<ProjectTracker.Models.Project>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Projects List</h2>
+        </div>
+        <div class="col-6">
+            <a asp-area="" asp-controller="Project" asp-action="Create" class="btn btn-primary">Create new Project</a>
+            
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-boredred table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Project Name
+                    </th>
+                    
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Created
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td width="30%">@item.Name</td>
+                        
+                        <td width="30%">@item.Description</td>
+                        <td width="30%">@item.Created</td>
+                        <td width="30">
+                            <div class="w-100 btn-group" role="group">
+                                <a asp-controller="Project" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary">Update</a>
+                                <a asp-controller="Project" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger">Delete</a>
+                                
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="w-100">
+                                
+                                <a asp-controller="Ticket" asp-action="Index" asp-route-Id="@item.Id" class="btn btn-success w-100">Project Tickets</a>
+                                
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No items created yet</p>
+    }
+
+</div>

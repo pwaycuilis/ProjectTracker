@@ -1,0 +1,89 @@
+﻿
+@model Ticket
+
+<form method="post" asp-action="Create">
+    <table class="table caption-top table-striped">
+        <caption>Add Ticket</caption>
+
+        <thead>
+            <tr>
+                <th scope="col">
+                    <label asp-for="Name"></label>
+                </th>
+
+                <th scope="col">Description</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Status</th>
+                <th scope="col">Type</th>
+                <th scope="col">Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @*<th scope="row">Text Here</th>*@
+                <td>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </td>
+
+                <td>
+                    <input asp-for="Description" class="form-control" />
+                </td>
+                <td>
+                    <label for="Priority">Priority</label>
+                    <select name="Priority" id="tickets">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                        <option value="Urgent">Urgent</option>
+                    </select>
+                </td>
+                <td>
+                    <label for="Status">Status</label>
+                    <select name="Status" id="tickets">
+                        <option value="New">New</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </td>
+
+                <td>
+                    <label for="Type">Type</label>
+                    <select name="Type" id="tickets">
+                        <option value="Feature">Feature</option>
+                        <option value="Chore">Chore</option>
+                        <option value="Bug">Bug</option>
+
+                    </select>
+                </td>
+                <td>
+                    @DateTime.Now
+                </td>
+
+                <td>
+                    <select asp-for="ProjectId" asp-items="@ViewBag.ProjectId" class="form-control">
+                        <option value="0">Choose a Project</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="border p-3 border-bottom">
+        <div class="form-group row">
+            <div class="col-8 offset-2 row">
+                <div class="col">
+                    <input type="submit" class="btn btn-info w-75" value="Create" />
+                </div>
+                <div class="col">
+                    <a asp-controller="Ticket" asp-action="Index" class="btn btn-danger w-75">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
