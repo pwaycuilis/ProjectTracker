@@ -1,7 +1,86 @@
 ﻿
 @model Ticket
 
-<form method="post" asp-action="Create">
+<h1>Create Ticket</h1>
+<div class="row">
+    <div class="col-md-10">
+        <form method="post" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="Priority">Priority</label>
+                <div class="active">
+                    <select name="Priority" id="tickets">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                        <option value="Urgent">Urgent</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Status">Status</label>
+
+
+                <div class="dropdown-menu-lg-right">
+                    <select name="Status" id="tickets">
+                        <option value="New">New</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Type">Type</label>
+
+                <div class="dropdown-menu-xl-left">
+                    <select name="Type" id="tickets">
+                        <option value="Feature">Feature</option>
+                        <option value="Chore">Chore</option>
+                        <option value="Bug">Bug</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*Currently using submitter as placeholder before adding
+                    new column for AssignedUser to database
+                    -- submitter currently just defaults to logged in user*@
+                <select asp-for="Submitter" asp-items="@ViewBag.UserList" class="form-control">
+                    <option value="0">Assign to:</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <select asp-for="ProjectId" asp-items="@ViewBag.ProjectId" class="form-control">
+                    <option value="0">Choose a Project</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-info w-75" value="Create" />
+            </div>
+
+            <div class="col">
+                <a asp-controller="Ticket" asp-action="Index" class="btn btn-danger w-75">Go Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<form method="post" asp-action="Create">
     <table class="table caption-top table-striped">
         <caption>Add Ticket</caption>
 
@@ -20,7 +99,7 @@
         </thead>
         <tbody>
             <tr>
-                @*<th scope="row">Text Here</th>*@
+                
                 <td>
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
@@ -80,7 +159,8 @@
             </div>
         </div>
     </div>
-</form>
+</form>*@
+
 
 @section Scripts{
     @{

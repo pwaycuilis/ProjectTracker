@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectTracker.Models.Ticket>
+﻿@model PaginatedList<ProjectTracker.Models.Ticket>
 
 
 <div class="container p-3">
@@ -17,7 +17,7 @@
         @using (Html.BeginForm())
         {
             <p>
-                Find by name or description: @Html.TextBox("SearchString")
+                Search: @Html.TextBox("SearchString")
                 <input type="submit" value="Search" />
             </p>
         }
@@ -38,7 +38,7 @@
                         Description
                     </th>
                     <th>
-                        Status
+                        <a asp-controller="Ticket" asp-action="Index" asp-route-sortOrder="@ViewBag.StatusSortParm" class="btn btn-outline-secondary font-weight-bold">Status</a>
                     </th>
                     <th>
                         @*Creation Date*@
@@ -85,3 +85,23 @@
     }
 
 </div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

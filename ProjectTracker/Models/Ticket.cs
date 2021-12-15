@@ -17,6 +17,7 @@ namespace ProjectTracker.Models
 		public string Priority { get; set; }
 		public string Status { get; set; }
 		public string Type { get; set; }
+		
 		public DateTime Created { get; set; }
 		public DateTime Modified { get; set; }
 		[Range(1, int.MaxValue, ErrorMessage = "You must choose a project")]
@@ -24,5 +25,6 @@ namespace ProjectTracker.Models
 
 		[ForeignKey("ProjectId")]
 		public virtual Project Project { get; set; }
+		public string Submitter { get; set; }
 	}
 }
