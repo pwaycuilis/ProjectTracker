@@ -36,6 +36,7 @@ namespace ProjectTracker.Controllers
                 ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
                 ViewBag.ProjectSortParm = sortOrder == "Project" ? "proj_desc" : "Project";
                 ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
+                ViewBag.PrioritySortParm = sortOrder == "Priority" ? "priority_desc" : "Priority";
                 //var items = _db.Items.OrderBy(x => x.Id).Include(x => x.Project);
 
                 //PAGINATION
@@ -83,6 +84,12 @@ namespace ProjectTracker.Controllers
                         break;
                     case "status_desc":
                         items = items.OrderByDescending(x => x.Status).Include(x => x.Project);
+                        break;
+                    case "Priority":
+                        items = items.OrderBy(x => x.Priority).Include(x => x.Project);
+                        break;
+                    case "priority_desc":
+                        items = items.OrderByDescending(x => x.Priority).Include(x => x.Project);
                         break;
                     default:
                         items = items.OrderBy(x => x.Id).Include(x => x.Project);

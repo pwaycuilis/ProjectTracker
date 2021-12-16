@@ -35,18 +35,19 @@
                         @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectSortParm })
                     </th>
                     <th>
-                        Description
+                        <a asp-controller="Ticket" asp-action="Index" asp-route-sortOrder="@ViewBag.PrioritySortParm" class="btn btn-outline-secondary font-weight-bold">Priority</a>
                     </th>
                     <th>
                         <a asp-controller="Ticket" asp-action="Index" asp-route-sortOrder="@ViewBag.StatusSortParm" class="btn btn-outline-secondary font-weight-bold">Status</a>
                     </th>
                     <th>
+                        Submitter
+                    </th>
+                    <th>
                         @*Creation Date*@
                         @Html.ActionLink("Date Created", "Index", new { sortOrder = ViewBag.DateSortParm })
                     </th>
-                    <th>
-                        Last Updated
-                    </th>
+
 
                 </tr>
             </thead>
@@ -56,10 +57,10 @@
                     <tr>
                         <td width="15%">@item.Name</td>
                         <td width="15%">@item.Project.Name</td>
-                        <td width="15%">@item.Description</td>
+                        <td width="15%">@item.Priority</td>
                         <td width="15%">@item.Status</td>
+                        <td width="15%">@item.Submitter</td>
                         <td width="15%">@item.Created</td>
-                        <td width="15%">@item.Modified</td>
                         @*<td width="15%">Edit</td>
                             <td width="15%">Delete</td>*@
                         <td width="15%">
